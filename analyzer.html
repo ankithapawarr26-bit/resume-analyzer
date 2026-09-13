@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResumeIQ | Analyzer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/analyzer.js" defer></script>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        Resume<span>IQ</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="analyzer.html" class="active">Analyzer</a>
+        <a href="results.html">Results</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+
+    <button class="theme-btn" id="themeToggle">◐</button>
+
+</header>
+
+
+<main class="page-container">
+
+    <section class="page-header">
+
+        <span class="section-label">RESUME ANALYZER</span>
+
+        <h1>Analyze your resume</h1>
+
+        <p>
+            Add your resume and a target job description to receive
+            a personalized analysis.
+        </p>
+
+    </section>
+
+
+    <section class="analyzer-grid">
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="panel-number">01</span>
+                    <h2>Your Resume</h2>
+                </div>
+
+                <span class="required">Required</span>
+
+            </div>
+
+
+            <div class="upload-box" id="dropZone">
+
+                <div class="upload-icon">📄</div>
+
+                <h3>Upload your resume</h3>
+
+                <p>
+                    Drag & drop a TXT file here or choose a file
+                </p>
+
+                <label class="upload-btn">
+
+                    Choose File
+
+                    <input
+                        type="file"
+                        id="resumeFile"
+                        accept=".txt"
+                        hidden
+                    >
+
+                </label>
+
+                <small>
+                    Demo supports .txt files
+                </small>
+
+            </div>
+
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+
+            <label class="input-label">
+                Paste Resume Text
+            </label>
+
+            <textarea
+                id="resumeText"
+                class="large-textarea"
+                placeholder="Paste your resume content here...
+
+Example:
+
+Ankitha
+BCA Student
+
+Skills:
+Python, HTML, CSS, JavaScript, SQL
+
+Education:
+Bachelor of Computer Applications
+
+Projects:
+Expense Tracker
+Resume Analyzer
+
+Experience:
+Research Analyst Intern
+"
+            ></textarea>
+
+            <div class="character-count">
+                <span id="resumeCount">0</span> characters
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="panel-number">02</span>
+                    <h2>Target Job</h2>
+                </div>
+
+                <span class="optional">Optional</span>
+
+            </div>
+
+
+            <label class="input-label">
+                Job Title
+            </label>
+
+            <input
+                type="text"
+                id="jobTitle"
+                class="text-input"
+                placeholder="e.g. Software Developer"
+            >
+
+
+            <label class="input-label">
+                Job Description
+            </label>
+
+            <textarea
+                id="jobDescription"
+                class="job-textarea"
+                placeholder="Paste the job description here...
+
+Example:
+
+We are looking for a Software Developer with knowledge of
+JavaScript, Python, SQL, HTML, CSS and Git.
+
+Responsibilities include developing web applications,
+working with databases and collaborating with teams."
+            ></textarea>
+
+            <div class="character-count">
+                <span id="jobCount">0</span> characters
+            </div>
+
+
+            <div class="info-box">
+
+                <span>💡</span>
+
+                <div>
+                    <strong>Why add a job description?</strong>
+
+                    <p>
+                        ResumeIQ can compare your resume with the
+                        job description and identify missing keywords.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="analyze-action">
+
+        <button
+            id="analyzeBtn"
+            class="btn primary-btn analyze-btn"
+        >
+            Analyze Resume →
+        </button>
+
+        <p id="analyzeMessage"></p>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">ResumeIQ</div>
+
+    <p>Smart resume analysis for better applications.</p>
+
+    <p class="copyright">
+        © 2026 ResumeIQ
+    </p>
+
+</footer>
+
+</body>
+</html>
