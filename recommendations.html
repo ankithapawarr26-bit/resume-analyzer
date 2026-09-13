@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ResumeIQ | Recommendations</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/app.js" defer></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        Resume<span>IQ</span>
+    </a>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="analyzer.html">Analyzer</a>
+
+        <a href="results.html">Results</a>
+
+        <a
+            href="recommendations.html"
+            class="active"
+        >
+            Recommendations
+        </a>
+
+        <a href="settings.html">Settings</a>
+
+    </nav>
+
+    <button class="theme-btn" id="themeToggle">
+        ◐
+    </button>
+
+</header>
+
+
+<main class="page-container">
+
+    <section class="page-header">
+
+        <span class="section-label">
+            IMPROVEMENT PLAN
+        </span>
+
+        <h1>Resume Recommendations</h1>
+
+        <p>
+            Practical suggestions based on your latest analysis.
+        </p>
+
+    </section>
+
+
+    <div id="noRecommendations" class="empty-state">
+
+        <div class="empty-icon">💡</div>
+
+        <h2>No recommendations yet</h2>
+
+        <p>
+            Analyze your resume to generate personalized suggestions.
+        </p>
+
+        <a
+            href="analyzer.html"
+            class="btn primary-btn"
+        >
+            Analyze Resume →
+        </a>
+
+    </div>
+
+
+    <section
+        id="recommendationContent"
+        class="hidden"
+    >
+
+
+        <div class="recommendation-summary">
+
+            <div>
+
+                <span class="section-label">
+                    YOUR PRIORITY
+                </span>
+
+                <h2 id="priorityTitle">
+                    Improve your resume
+                </h2>
+
+                <p id="priorityText">
+                    Focus on the recommendations below.
+                </p>
+
+            </div>
+
+            <div class="priority-score">
+
+                <strong id="recommendationScore">
+                    0
+                </strong>
+
+                <span>/100</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="recommendation-grid">
+
+
+            <div class="recommendation-card">
+
+                <div class="recommendation-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <h3>Resume Sections</h3>
+
+                    <p>
+                        Make sure your resume contains the important
+                        sections expected in a professional resume.
+                    </p>
+
+                    <ul id="sectionRecommendations"></ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="recommendation-card">
+
+                <div class="recommendation-icon">
+                    🧠
+                </div>
+
+                <div>
+
+                    <h3>Skills</h3>
+
+                    <p>
+                        Highlight relevant technical skills clearly.
+                    </p>
+
+                    <ul id="skillRecommendations"></ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="recommendation-card">
+
+                <div class="recommendation-icon">
+                    🔎
+                </div>
+
+                <div>
+
+                    <h3>Keywords</h3>
+
+                    <p>
+                        Match relevant keywords from the target job
+                        description where they genuinely apply.
+                    </p>
+
+                    <ul id="keywordRecommendations"></ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="recommendation-card">
+
+                <div class="recommendation-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <h3>Impact</h3>
+
+                    <p>
+                        Make your experience and projects more
+                        specific and results-oriented.
+                    </p>
+
+                    <ul id="impactRecommendations"></ul>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="checklist-panel">
+
+            <div class="result-panel-header">
+
+                <h2>Resume Improvement Checklist</h2>
+
+                <span id="checklistProgress">
+                    0 / 6
+                </span>
+
+            </div>
+
+
+            <div class="checklist">
+
+                <label>
+                    <input type="checkbox">
+                    <span>Use a clear professional summary</span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>Highlight relevant technical skills</span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>Include measurable achievements</span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>Use clear section headings</span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>Tailor keywords to the job description</span>
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    <span>Proofread your final resume</span>
+                </label>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ResumeIQ
+    </div>
+
+    <p>
+        Smart resume analysis for better applications.
+    </p>
+
+    <p class="copyright">
+        © 2026 ResumeIQ
+    </p>
+
+</footer>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const raw =
+        localStorage.getItem("resumeAnalysis");
+
+    if (!raw) return;
+
+    let data;
+
+    try {
+        data = JSON.parse(raw);
+    } catch {
+        return;
+    }
+
+
+    document
+        .getElementById("noRecommendations")
+        .classList.add("hidden");
+
+    document
+        .getElementById("recommendationContent")
+        .classList.remove("hidden");
+
+
+    document.getElementById(
+        "recommendationScore"
+    ).textContent = data.overallScore;
+
+
+    const sectionRecommendations =
+        document.getElementById(
+            "sectionRecommendations"
+        );
+
+
+    const missingSections =
+        Object.entries(data.sections)
+            .filter(([name, found]) => !found)
+            .map(([name]) => name);
+
+
+    sectionRecommendations.innerHTML =
+        missingSections.length
+
+        ? missingSections
+            .map(item => `<li>Add a <strong>${item}</strong> section.</li>`)
+            .join("")
+
+        : "<li>Your main resume sections are present.</li>";
+
+
+    const skillRecommendations =
+        document.getElementById(
+            "skillRecommendations"
+        );
+
+
+    skillRecommendations.innerHTML =
+        data.skills.length < 4
+
+        ? `
+            <li>Add relevant technical skills.</li>
+            <li>Group skills into clear categories.</li>
+            <li>Only include skills you actually know.</li>
+        `
+
+        : `
+            <li>Your resume contains several recognizable skills.</li>
+            <li>Place the most relevant skills near the top.</li>
+            <li>Tailor your skills to each target role.</li>
+        `;
+
+
+    const keywordRecommendations =
+        document.getElementById(
+            "keywordRecommendations"
+        );
+
+
+    if (data.missingKeywords.length) {
+
+        keywordRecommendations.innerHTML =
+            data.missingKeywords
+                .slice(0, 8)
+                .map(
+                    keyword =>
+                        `<li>Consider mentioning <strong>${keyword}</strong> if it genuinely applies.</li>`
+                )
+                .join("");
+
+    } else {
+
+        keywordRecommendations.innerHTML =
+            "<li>No major missing keywords were detected.</li>";
+
+    }
+
+
+    const impactRecommendations =
+        document.getElementById(
+            "impactRecommendations"
+        );
+
+
+    impactRecommendations.innerHTML = `
+        <li>Start bullet points with strong action verbs.</li>
+        <li>Describe what you built, improved or contributed to.</li>
+        <li>Add numbers or measurable results when available.</li>
+    `;
+
+
+    const priorityTitle =
+        document.getElementById("priorityTitle");
+
+    const priorityText =
+        document.getElementById("priorityText");
+
+
+    if (data.overallScore >= 80) {
+
+        priorityTitle.textContent =
+            "Polish an already strong resume";
+
+        priorityText.textContent =
+            "Focus on tailoring your resume to each job.";
+
+    } else if (data.overallScore >= 60) {
+
+        priorityTitle.textContent =
+            "Strengthen your resume";
+
+        priorityText.textContent =
+            "Improve missing sections, keywords and measurable impact.";
+
+    } else {
+
+        priorityTitle.textContent =
+            "Build a stronger foundation";
+
+        priorityText.textContent =
+            "Focus first on structure, skills and clear professional content.";
+
+    }
+
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".checklist input"
+        );
+
+
+    function updateChecklist() {
+
+        const completed =
+            [...checkboxes]
+                .filter(box => box.checked)
+                .length;
+
+        document.getElementById(
+            "checklistProgress"
+        ).textContent =
+            `${completed} / ${checkboxes.length}`;
+
+        localStorage.setItem(
+            "resumeChecklist",
+            JSON.stringify(
+                [...checkboxes].map(box => box.checked)
+            )
+        );
+
+    }
+
+
+    const savedChecklist =
+        JSON.parse(
+            localStorage.getItem("resumeChecklist") || "[]"
+        );
+
+
+    checkboxes.forEach((box, index) => {
+
+        if (savedChecklist[index]) {
+            box.checked = true;
+        }
+
+        box.addEventListener(
+            "change",
+            updateChecklist
+        );
+
+    });
+
+
+    updateChecklist();
+
+});
+
+</script>
+
+</body>
+</html>
