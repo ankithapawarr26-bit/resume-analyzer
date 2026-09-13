@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ | Smart Resume Analyzer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        Resume<span>IQ</span>
+    </a>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="results.html">Results</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+
+    <button class="theme-btn" id="themeToggle" title="Toggle theme">
+        ◐
+    </button>
+</header>
+
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ✨ Smart Resume Analysis
+        </div>
+
+        <h1>
+            Build a resume that
+            <span>gets noticed.</span>
+        </h1>
+
+        <p>
+            ResumeIQ analyzes your resume, checks ATS compatibility,
+            compares your skills with a job description, and gives you
+            practical suggestions to improve your application.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="analyzer.html" class="btn primary-btn">
+                Analyze My Resume →
+            </a>
+
+            <a href="#features" class="btn secondary-btn">
+                Explore Features
+            </a>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>ATS</strong>
+                <span>Compatibility</span>
+            </div>
+
+            <div>
+                <strong>Skills</strong>
+                <span>Detection</span>
+            </div>
+
+            <div>
+                <strong>Keywords</strong>
+                <span>Matching</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="mock-header">
+            <span>Resume Analysis</span>
+            <span class="status-dot">●</span>
+        </div>
+
+        <div class="score-circle">
+            <div>
+                <strong>87</strong>
+                <small>/100</small>
+            </div>
+        </div>
+
+        <h3>Great Resume!</h3>
+
+        <p class="muted">
+            Your resume has strong ATS compatibility.
+        </p>
+
+        <div class="mini-progress">
+            <div>
+                <span>Skills</span>
+                <strong>92%</strong>
+            </div>
+            <div class="progress">
+                <span style="width:92%"></span>
+            </div>
+        </div>
+
+        <div class="mini-progress">
+            <div>
+                <span>Keywords</span>
+                <strong>84%</strong>
+            </div>
+            <div class="progress">
+                <span style="width:84%"></span>
+            </div>
+        </div>
+
+        <div class="mini-progress">
+            <div>
+                <span>Sections</span>
+                <strong>90%</strong>
+            </div>
+            <div class="progress">
+                <span style="width:90%"></span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features-section" id="features">
+
+    <div class="section-heading">
+
+        <span class="section-label">FEATURES</span>
+
+        <h2>
+            Everything you need to improve your resume
+        </h2>
+
+        <p>
+            Get a detailed overview of what works and what can be improved.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>ATS Score</h3>
+            <p>
+                Check how well your resume is structured for
+                Applicant Tracking Systems.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">🔎</div>
+            <h3>Keyword Matching</h3>
+            <p>
+                Compare your resume with a job description
+                and identify important missing keywords.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Skill Detection</h3>
+            <p>
+                Automatically detect technical and professional
+                skills mentioned in your resume.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Detailed Analysis</h3>
+            <p>
+                View strengths, weaknesses, sections and
+                improvement opportunities.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Smart Suggestions</h3>
+            <p>
+                Get actionable recommendations based on
+                your resume content.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Private & Local</h3>
+            <p>
+                Your demo analysis runs directly in your browser
+                without uploading your resume to a server.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="how-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">HOW IT WORKS</span>
+
+        <h2>Analyze your resume in three steps</h2>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="step-number">01</div>
+            <h3>Add Resume</h3>
+            <p>
+                Upload a text resume or paste your resume content.
+            </p>
+        </div>
+
+
+        <div class="step">
+            <div class="step-number">02</div>
+            <h3>Add Job Description</h3>
+            <p>
+                Add the job description you want to target.
+            </p>
+        </div>
+
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <h3>Get Your Report</h3>
+            <p>
+                See your score, skills, keywords and recommendations.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta-section">
+
+    <h2>Ready to improve your resume?</h2>
+
+    <p>
+        Run your first ResumeIQ analysis and discover what you can improve.
+    </p>
+
+    <a href="analyzer.html" class="btn primary-btn">
+        Start Analysis →
+    </a>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ResumeIQ
+    </div>
+
+    <p>
+        Smart resume analysis for better applications.
+    </p>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="settings.html">Settings</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 ResumeIQ. Built as a portfolio project.
+    </p>
+
+</footer>
+
+</body>
+</html>
