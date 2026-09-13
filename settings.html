@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ResumeIQ | Settings</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/app.js" defer></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        Resume<span>IQ</span>
+    </a>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="analyzer.html">Analyzer</a>
+
+        <a href="results.html">Results</a>
+
+        <a href="recommendations.html">Recommendations</a>
+
+        <a href="settings.html" class="active">
+            Settings
+        </a>
+
+    </nav>
+
+    <button
+        class="theme-btn"
+        id="themeToggle"
+    >
+        ◐
+    </button>
+
+</header>
+
+
+<main class="page-container">
+
+    <section class="page-header">
+
+        <span class="section-label">
+            SETTINGS
+        </span>
+
+        <h1>Application Settings</h1>
+
+        <p>
+            Manage your ResumeIQ preferences and saved analysis.
+        </p>
+
+    </section>
+
+
+    <section class="settings-container">
+
+
+        <div class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    🌙
+                </div>
+
+                <div>
+
+                    <h2>Appearance</h2>
+
+                    <p>
+                        Change the appearance of ResumeIQ.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>Dark Mode</strong>
+
+                    <p>
+                        Switch between light and dark themes.
+                    </p>
+
+                </div>
+
+                <button
+                    id="settingsTheme"
+                    class="toggle"
+                >
+                    <span></span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    💾
+                </div>
+
+                <div>
+
+                    <h2>Saved Analysis</h2>
+
+                    <p>
+                        Manage analysis data stored in your browser.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>Export Analysis</strong>
+
+                    <p>
+                        Download your latest analysis as a JSON file.
+                    </p>
+
+                </div>
+
+                <button
+                    id="exportBtn"
+                    class="small-btn"
+                >
+                    Export
+                </button>
+
+            </div>
+
+
+            <div class="setting-row danger-row">
+
+                <div>
+
+                    <strong>Clear Analysis</strong>
+
+                    <p>
+                        Remove your saved resume analysis from this browser.
+                    </p>
+
+                </div>
+
+                <button
+                    id="clearBtn"
+                    class="danger-btn"
+                >
+                    Clear Data
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-card">
+
+            <div class="settings-title">
+
+                <div class="settings-icon">
+                    ℹ️
+                </div>
+
+                <div>
+
+                    <h2>About ResumeIQ</h2>
+
+                    <p>
+                        Project information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-content">
+
+                <p>
+                    <strong>ResumeIQ</strong> is a portfolio project
+                    demonstrating front-end development, browser storage,
+                    text processing and rule-based resume analysis.
+                </p>
+
+                <div class="tech-tags">
+
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                    <span>LocalStorage</span>
+                    <span>File API</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        ResumeIQ
+    </div>
+
+    <p>
+        Smart resume analysis for better applications.
+    </p>
+
+    <p class="copyright">
+        © 2026 ResumeIQ
+    </p>
+
+</footer>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const themeButton =
+        document.getElementById("settingsTheme");
+
+    function updateToggle() {
+
+        const dark =
+            document.body.classList.contains("dark");
+
+        themeButton.classList.toggle(
+            "active",
+            dark
+        );
+
+    }
+
+
+    themeButton.addEventListener(
+        "click",
+        () => {
+
+            const dark =
+                document.body.classList.toggle("dark");
+
+            localStorage.setItem(
+                "resumeTheme",
+                dark ? "dark" : "light"
+            );
+
+            updateToggle();
+
+        }
+    );
+
+
+    updateToggle();
+
+
+    document
+        .getElementById("exportBtn")
+        .addEventListener(
+            "click",
+            () => {
+
+                const data =
+                    localStorage.getItem(
+                        "resumeAnalysis"
+                    );
+
+                if (!data) {
+
+                    alert(
+                        "No analysis available to export."
+                    );
+
+                    return;
+                }
+
+
+                const blob =
+                    new Blob(
+                        [data],
+                        {
+                            type:
+                                "application/json"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(blob);
+
+
+                const link =
+                    document.createElement("a");
+
+                link.href = url;
+
+                link.download =
+                    "resumeiq-analysis.json";
+
+                link.click();
+
+                URL.revokeObjectURL(url);
+
+            }
+        );
+
+
+    document
+        .getElementById("clearBtn")
+        .addEventListener(
+            "click",
+            () => {
+
+                const confirmed =
+                    confirm(
+                        "Clear your saved ResumeIQ analysis?"
+                    );
+
+                if (!confirmed) return;
+
+                localStorage.removeItem(
+                    "resumeAnalysis"
+                );
+
+                localStorage.removeItem(
+                    "resumeChecklist"
+                );
+
+                alert(
+                    "Analysis data cleared."
+                );
+
+            }
+        );
+
+});
+
+</script>
+
+</body>
+</html>
