@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ResumeIQ | Analysis Results</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/app.js" defer></script>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        Resume<span>IQ</span>
+    </a>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="results.html" class="active">Results</a>
+        <a href="recommendations.html">Recommendations</a>
+        <a href="settings.html">Settings</a>
+
+    </nav>
+
+    <button class="theme-btn" id="themeToggle">
+        ◐
+    </button>
+
+</header>
+
+
+<main class="page-container">
+
+    <section class="page-header">
+
+        <span class="section-label">
+            ANALYSIS REPORT
+        </span>
+
+        <h1>Your Resume Results</h1>
+
+        <p id="resultSubtitle">
+            Your latest resume analysis is shown below.
+        </p>
+
+    </section>
+
+
+    <div id="emptyResults" class="empty-state">
+
+        <div class="empty-icon">📊</div>
+
+        <h2>No analysis available</h2>
+
+        <p>
+            Analyze your resume first to see your results.
+        </p>
+
+        <a href="analyzer.html" class="btn primary-btn">
+            Analyze Resume →
+        </a>
+
+    </div>
+
+
+    <section id="resultsContent" class="hidden">
+
+
+        <div class="score-overview">
+
+
+            <div class="main-score-card">
+
+                <div class="score-ring">
+
+                    <div>
+                        <strong id="overallScore">0</strong>
+                        <small>/100</small>
+                    </div>
+
+                </div>
+
+                <h2 id="scoreLabel">
+                    Resume Score
+                </h2>
+
+                <p id="scoreDescription">
+                    Your overall resume score.
+                </p>
+
+            </div>
+
+
+            <div class="score-details">
+
+                <div class="score-detail-card">
+
+                    <span class="detail-icon">🎯</span>
+
+                    <div>
+                        <span>ATS Structure</span>
+                        <strong id="atsScore">0%</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="score-detail-card">
+
+                    <span class="detail-icon">🧠</span>
+
+                    <div>
+                        <span>Skills</span>
+                        <strong id="skillsScore">0%</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="score-detail-card">
+
+                    <span class="detail-icon">🔎</span>
+
+                    <div>
+                        <span>Keywords</span>
+                        <strong id="keywordScore">0%</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="score-detail-card">
+
+                    <span class="detail-icon">📝</span>
+
+                    <div>
+                        <span>Content</span>
+                        <strong id="contentScore">0%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="results-grid">
+
+
+            <div class="result-panel">
+
+                <div class="result-panel-header">
+
+                    <h2>Detected Skills</h2>
+
+                    <span id="skillCount">0 skills</span>
+
+                </div>
+
+                <div
+                    id="skillsList"
+                    class="tag-list"
+                ></div>
+
+            </div>
+
+
+            <div class="result-panel">
+
+                <div class="result-panel-header">
+
+                    <h2>Resume Sections</h2>
+
+                    <span id="sectionCount">
+                        0 / 7
+                    </span>
+
+                </div>
+
+                <div
+                    id="sectionsList"
+                    class="section-check-list"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="results-grid">
+
+
+            <div class="result-panel">
+
+                <div class="result-panel-header">
+
+                    <h2>Strengths</h2>
+
+                </div>
+
+                <div
+                    id="strengthsList"
+                    class="insight-list positive"
+                ></div>
+
+            </div>
+
+
+            <div class="result-panel">
+
+                <div class="result-panel-header">
+
+                    <h2>Areas to Improve</h2>
+
+                </div>
+
+                <div
+                    id="weaknessesList"
+                    class="insight-list warning"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="result-panel">
+
+            <div class="result-panel-header">
+
+                <h2>Keyword Match</h2>
+
+                <span id="keywordCount">
+                    0 matched
+                </span>
+
+            </div>
+
+            <div
+                id="keywordList"
+                class="keyword-grid"
+            ></div>
+
+        </div>
+
+
+        <div class="result-actions">
+
+            <a
+                href="recommendations.html"
+                class="btn primary-btn"
+            >
+                View Recommendations →
+            </a>
+
+            <a
+                href="analyzer.html"
+                class="btn secondary-btn"
+            >
+                Analyze Again
+            </a>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">ResumeIQ</div>
+
+    <p>Smart resume analysis for better applications.</p>
+
+    <p class="copyright">
+        © 2026 ResumeIQ
+    </p>
+
+</footer>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const raw = localStorage.getItem("resumeAnalysis");
+
+    if (!raw) {
+        return;
+    }
+
+    let data;
+
+    try {
+        data = JSON.parse(raw);
+    } catch {
+        return;
+    }
+
+    document.getElementById("emptyResults").classList.add("hidden");
+    document.getElementById("resultsContent").classList.remove("hidden");
+
+    document.getElementById("resultSubtitle").textContent =
+        data.jobTitle
+            ? `Analysis for ${data.jobTitle}`
+            : "Your latest resume analysis is shown below.";
+
+    document.getElementById("overallScore").textContent =
+        data.overallScore;
+
+    document.getElementById("atsScore").textContent =
+        data.atsScore + "%";
+
+    document.getElementById("skillsScore").textContent =
+        data.skillsScore + "%";
+
+    document.getElementById("keywordScore").textContent =
+        data.keywordScore + "%";
+
+    document.getElementById("contentScore").textContent =
+        data.contentScore + "%";
+
+
+    let scoreLabel = "Needs Improvement";
+
+    if (data.overallScore >= 80) {
+        scoreLabel = "Excellent Resume";
+    } else if (data.overallScore >= 65) {
+        scoreLabel = "Good Resume";
+    } else if (data.overallScore >= 50) {
+        scoreLabel = "Fair Resume";
+    }
+
+    document.getElementById("scoreLabel").textContent =
+        scoreLabel;
+
+
+    document.getElementById("scoreDescription").textContent =
+        data.overallScore >= 75
+            ? "Your resume has a strong overall structure."
+            : "There are several areas that can be improved.";
+
+
+    document.getElementById("skillCount").textContent =
+        `${data.skills.length} skills`;
+
+
+    const skillsList =
+        document.getElementById("skillsList");
+
+    if (data.skills.length === 0) {
+
+        skillsList.innerHTML =
+            `<p class="muted">No recognized skills detected.</p>`;
+
+    } else {
+
+        skillsList.innerHTML =
+            data.skills
+                .map(skill => `<span class="tag">${skill}</span>`)
+                .join("");
+
+    }
+
+
+    const sectionsList =
+        document.getElementById("sectionsList");
+
+    const sectionEntries =
+        Object.entries(data.sections);
+
+    const foundSections =
+        sectionEntries.filter(([key, value]) => value).length;
+
+    document.getElementById("sectionCount").textContent =
+        `${foundSections} / ${sectionEntries.length}`;
+
+
+    sectionsList.innerHTML =
+        sectionEntries
+            .map(([key, value]) => `
+                <div class="section-check">
+                    <span>${value ? "✓" : "○"}</span>
+                    <span>${key}</span>
+                    <strong class="${value ? "found" : "missing"}">
+                        ${value ? "Found" : "Missing"}
+                    </strong>
+                </div>
+            `)
+            .join("");
+
+
+    const strengthsList =
+        document.getElementById("strengthsList");
+
+    strengthsList.innerHTML =
+        data.strengths
+            .map(item => `
+                <div class="insight-item">
+                    <span>✓</span>
+                    <p>${item}</p>
+                </div>
+            `)
+            .join("");
+
+
+    const weaknessesList =
+        document.getElementById("weaknessesList");
+
+    weaknessesList.innerHTML =
+        data.weaknesses
+            .map(item => `
+                <div class="insight-item">
+                    <span>!</span>
+                    <p>${item}</p>
+                </div>
+            `)
+            .join("");
+
+
+    const keywordList =
+        document.getElementById("keywordList");
+
+    const matched =
+        data.matchedKeywords || [];
+
+    const missing =
+        data.missingKeywords || [];
+
+
+    keywordList.innerHTML = [
+
+        ...matched.map(keyword => `
+            <span class="keyword matched">
+                ✓ ${keyword}
+            </span>
+        `),
+
+        ...missing.map(keyword => `
+            <span class="keyword missing-keyword">
+                + ${keyword}
+            </span>
+        `)
+
+    ].join("");
+
+
+    document.getElementById("keywordCount").textContent =
+        `${matched.length} matched`;
+
+});
+
+</script>
+
+</body>
+</html>
